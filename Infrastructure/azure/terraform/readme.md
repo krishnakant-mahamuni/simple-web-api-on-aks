@@ -5,16 +5,11 @@
 az login 
     TENTANT_ID=<your-tenant-id>    
 
-"tenantId": "1c1b8dc9-5d75-4cfb-9d5e-56e61929d257",
-
-
 # view and select your subscription account
 
 az account list -o table
 SUBSCRIPTION=<id>
 az account set --subscription $SUBSCRIPTION
-
-"SUBSCRIPTION": "1905b060-3f48-4b00-8b11-7554c4fc2492",
 
 ```
 
@@ -124,4 +119,3 @@ CI/CD
 https://dev.azure.com/KKDevMS/
 https://github.com/HoussemDellai/AzureDevOpsPipelines-Tips
 
-az login --service-principal -u aa7a9b84-e924-4624-a827-2c9871f668e0 -p gthn-8A9ndZFXI4pG-I22pi7XVDYV7Sl-x --tenant 1c1b8dc9-5d75-4cfb-9d5e-56e61929d257
