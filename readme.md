@@ -128,6 +128,8 @@ terraform destroy -var serviceprinciple_id=$SERVICE_PRINCIPAL \
 
 ## Useful links and command
 
+```
+
 https://www.youtube.com/watch?v=ukmbiTSWU_M&list=UUCYR9GpcE3skVnyMU8Wx1kQ
 https://www.youtube.com/watch?v=bHjS4xqwc9A
 
@@ -142,3 +144,12 @@ docker tag <image_id> <tag>
 sudo docker push <image>
 
 sudo docker login <registry_name> --username <username> --password <password>
+
+```
+
+## Web api
+
+```
+https://www.hanselman.com/blog/aspnet-core-restful-web-api-versioning-made-easy
+
+```
