@@ -24,3 +24,9 @@ variable "location" {
 variable "kubernetes_version" {
     default = "1.18.10"
 }
+
+variable "kubernetes_cluster_name" {
+}
+
+variable "sku" {
+}

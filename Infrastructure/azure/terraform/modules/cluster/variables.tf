@@ -1,7 +1,6 @@
 variable "resource_group_name" {
 }
 
-
 variable "serviceprinciple_id" {
 }
 
@@ -10,6 +9,10 @@ variable "serviceprinciple_key" {
 
 variable "location" {
   default = "australiaeast"
+}
+
+variable "kubernetes_cluster_name" {
+  
 }
 
 variable "kubernetes_version" {

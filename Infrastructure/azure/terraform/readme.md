@@ -36,6 +36,10 @@ az role assignment create --assignee $SERVICE_PRINCIPAL \
 --scope "/subscriptions/$SUBSCRIPTION" \
 --role Contributor
 
+SERVICE_PRINCIPAL_JSON=$(az ad sp credential reset --name "aks-simple-web-api-sp" -o json)
+SERVICE_PRINCIPAL=$(echo $SERVICE_PRINCIPAL_JSON | jq -r '.appId')
+SERVICE_PRINCIPAL_SECRET=$(echo $SERVICE_PRINCIPAL_JSON | jq -r '.password')
+
 ```
 For extra reference you can also take a look at the Microsoft Docs: [here](https://github.com/MicrosoftDocs/azure-docs/blob/master/articles/aks/kubernetes-service-principal.md) </br>
 
@@ -72,21 +76,35 @@ terraform plan -var resource_group_name="simple-web-api-rg" \
     -var serviceprinciple_key="$SERVICE_PRINCIPAL_SECRET" \
     -var subscription_id="$SUBSCRIPTION" \
     -var tenant_id="$TENANT_ID" \
-    -var ssh_key="$SSH_KEY"
+    -var ssh_key="$SSH_KEY" \
+    -var kubernetes_cluster_name="simple-web-api-aks" \
+    -var sku="Standard"
 
 terraform apply -var resource_group_name="simple-web-api-rg" \
     -var serviceprinciple_id="$SERVICE_PRINCIPAL" \
     -var serviceprinciple_key="$SERVICE_PRINCIPAL_SECRET" \
     -var tenant_id="$TENANT_ID" \
     -var subscription_id="$SUBSCRIPTION" \
-    -var ssh_key="$SSH_KEY"
+    -var ssh_key="$SSH_KEY" \
+    -var kubernetes_cluster_name="simple-web-api-aks" \
+    -var sku="Standard" -auto-approve
+
+terraform destroy -var resource_group_name="simple-web-api-rg" \
+    -var serviceprinciple_id="$SERVICE_PRINCIPAL" \
+    -var serviceprinciple_key="$SERVICE_PRINCIPAL_SECRET" \
+    -var tenant_id="$TENANT_ID" \
+    -var subscription_id="$SUBSCRIPTION" \
+    -var ssh_key="$SSH_KEY" \
+    -var kubernetes_cluster_name="simple-web-api-aks" 
+    -var sku="Standard" -auto-approve
+    
 ```
 
 # Lets see what we deployed
 
 ```
 # grab our AKS config
-az aks get-credentials -n aks-getting-started -g aks-getting-started
+az aks get-credentials -n simple-web-api-aks -g simple-web-api-rg
 
 # Get kubectl
 
@@ -108,7 +126,6 @@ terraform destroy -var serviceprinciple_id=$SERVICE_PRINCIPAL \
     -var ssh_key="$SSH_KEY"
 ```
 
-
 ## Useful links and command
 
 https://www.youtube.com/watch?v=ukmbiTSWU_M&list=UUCYR9GpcE3skVnyMU8Wx1kQ
@@ -119,3 +136,9 @@ CI/CD
 https://dev.azure.com/KKDevMS/
 https://github.com/HoussemDellai/AzureDevOpsPipelines-Tips
 
+
+docker tag <image_id> <tag>
+
+sudo docker push <image>
+
+sudo docker login <registry_name> --username <username> --password <password>
