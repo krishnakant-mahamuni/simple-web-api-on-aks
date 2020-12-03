@@ -60,14 +60,14 @@ steps:
     targetType: 'inline'
     script: |
       echo $PWD
-      ls
+      ls app
     
 - task: Docker@2
   inputs:
     containerRegistry: 'simplewebapiacr'
     repository: 'simplewebapiimage'
     command: 'buildAndPush'
-    Dockerfile: '/app/dockerfile'
+    Dockerfile: '@($PWD)/app/dockerfile'
     tags: |
       $(Build.BuildId)
       latest
