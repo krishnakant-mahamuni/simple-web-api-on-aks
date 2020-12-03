@@ -33,3 +33,10 @@ steps:
     backendAzureRmContainerName: '$(container)'
     backendAzureRmKey: '$(tfstateFile)'
     allowTelemetryCollection: true
+
+- task: TerraformCLI@0
+  displayName: Terraform Plan
+  inputs:
+    command: 'validate'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/Infrastructure/azue/terraform'
+    allowTelemetryCollection: true
