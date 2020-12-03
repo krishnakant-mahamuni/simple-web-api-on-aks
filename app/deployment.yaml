@@ -17,6 +17,7 @@ spec:
       containers:
       - name: simple-web-api
         image: simplewebapiacr.azurecr.io/simplewebapiimage:latest
+        imagePullPolicy: Always
         resources:
           limits:
             memory: "128Mi"
