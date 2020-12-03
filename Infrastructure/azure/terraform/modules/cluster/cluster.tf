@@ -11,7 +11,7 @@ resource "azurerm_kubernetes_cluster" "simple-web-api-aks" {
   name                = "${var.prefix}-aks"
   location            = azurerm_resource_group.simple-web-api-rg.location
   resource_group_name = azurerm_resource_group.simple-web-api-rg.name
-  dns_prefix          = "${var.prefix}-aks"
+  dns_prefix          = "${var.prefix}-dnsprefix"
   kubernetes_version  = var.kubernetes_version
 
   tags = {
@@ -34,10 +34,25 @@ resource "azurerm_kubernetes_cluster" "simple-web-api-aks" {
     }
   }
 
-  lifecycle {
-    ignore_changes = [
-      default_node_pool[0].node_count,
-      default_node_pool[0].vm_size
-    ]
+  addon_profile {
+    aci_connector_linux {
+      enabled = false
+    }
+
+    azure_policy {
+      enabled = false
+    }
+
+    http_application_routing {
+      enabled = false
+    }
+
+    kube_dashboard {
+      enabled = false
+    }
+
+    oms_agent {
+      enabled = false
+    }
   }
 }
