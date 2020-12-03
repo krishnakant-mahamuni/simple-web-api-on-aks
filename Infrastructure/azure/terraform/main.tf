@@ -17,8 +17,6 @@ terraform {
 module "cluster" {
   source                  = "./modules/cluster/"
   resource_group_name     = var.resource_group_name
-  serviceprinciple_id     = var.client_id
-  serviceprinciple_key    = var.client_secret
   location                = var.location
   kubernetes_version      = var.kubernetes_version
 }
