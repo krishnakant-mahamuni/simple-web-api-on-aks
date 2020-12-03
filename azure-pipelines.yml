@@ -33,17 +33,3 @@ steps:
     backendAzureRmContainerName: '$(container)'
     backendAzureRmKey: '$(tfstateFile)'
     allowTelemetryCollection: true
-
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: |
-      az login 
-      
-      ACCOUNT_JSON=$(az account show -o json)
-      
-      TENANT_ID=$(echo $ACCOUNT_JSON | jq -r '.tenantId')
-      SUBSCRIPTION_ID=$(echo $ACCOUNT_JSON | jq -r '.id')
-      
-      echo $TENANT_ID
-      echo $SUBSCRIPTION_ID
