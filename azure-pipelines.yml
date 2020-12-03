@@ -37,6 +37,8 @@ steps:
     backendAzureRmKey: '$(tfstateFile)'
     allowTelemetryCollection: true
 
+
+
 - task: TerraformCLI@0
   displayName: Terraform Plan
   inputs:
