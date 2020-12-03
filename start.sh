@@ -21,3 +21,10 @@ az role assignment create --assignee $SERVICE_PRINCIPAL \
 az group create -l australiaeast -n tfstate-rg
 az storage account create -n aetfstate001sa -g tfstate-rg -l australiaeast --sku Standard_LRS
 az storage container create -n tfstate --account-name aetfstate001sa --resource-group tfstate-rg
+
+ARM_ACCESS_KEY=$(az keyvault secret show --name terraform-backend-key --vault-name myKeyVault --query value -o tsv)
+export ARM_ACCESS_KEY=77ZvD3TWqdNSjku7RXZ9Rkv+PPIS2rVGUSxiQt7CKkAvp8YzH2oBL2v1hRiJdMNVv92xRGoTyYRFByc7NnTnzw==
+
+
+ssh-keygen -t rsa -b 4096 -N "VeryStrongSecret007!" -C "kk.dev.ms@outlook.com" -q -f  ~/.ssh/id_rsa
+SSH_KEY=$(cat ~/.ssh/id_rsa.pub)

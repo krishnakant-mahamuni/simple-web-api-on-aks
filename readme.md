@@ -75,25 +75,25 @@ terraform init
 terraform plan -var resource_group_name="simple-web-api-rg" \
 -var serviceprinciple_id="$SERVICE_PRINCIPAL" \
 -var serviceprinciple_key="$SERVICE_PRINCIPAL_SECRET" \
--var subscription_id="$SUBSCRIPTION" \
+-var subscription_id="$SUBSCRIPTION_ID" \
+-var tenant_id="$TENANT_ID" \
+-var ssh_key="$SSH_KEY" \
+-var kubernetes_cluster_name="simple-web-api-aks" \
+-var sku="Standard"
+
+terraform apply -var resource_group_name="simple-web-api-rg" \
+-var serviceprinciple_id="$SERVICE_PRINCIPAL" \
+-var serviceprinciple_key="$SERVICE_PRINCIPAL_SECRET" \
+-var subscription_id="$SUBSCRIPTION_ID" \
 -var tenant_id="$TENANT_ID" \
 -var ssh_key="$SSH_KEY" \
 -var kubernetes_cluster_name="simple-web-api-aks" \
 -var sku="Standard" -auto-approve
 
-terraform apply -var resource_group_name="simple-web-api-rg" \
-    -var serviceprinciple_id="$SERVICE_PRINCIPAL" \
-    -var serviceprinciple_key="$SERVICE_PRINCIPAL_SECRET" \
-    -var subscription_id="$SUBSCRIPTION" \
-    -var tenant_id="$TENANT_ID" \
-    -var ssh_key="$SSH_KEY" \
-    -var kubernetes_cluster_name="simple-web-api-aks" \
-    -var sku="Standard" -auto-approve
-
 terraform destroy -var resource_group_name="simple-web-api-rg" \
     -var serviceprinciple_id="$SERVICE_PRINCIPAL" \
     -var serviceprinciple_key="$SERVICE_PRINCIPAL_SECRET" \
-    -var subscription_id="$SUBSCRIPTION" \
+    -var subscription_id="$SUBSCRIPTION_ID" \
     -var tenant_id="$TENANT_ID" \
     -var ssh_key="$SSH_KEY" \
     -var kubernetes_cluster_name="simple-web-api-aks" \
