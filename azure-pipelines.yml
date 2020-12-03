@@ -9,8 +9,31 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
+<<<<<<< HEAD
 variables:
   subscription_id: "<<subscription_id>>"
   tenant_id: "<<tenant_id>>"
 
   
+=======
+  variables:
+    imageName: 'simple-web-api-image'
+  
+steps:
+- task: Docker@2
+  displayName: Build an image
+  inputs:
+    repository: $(imageName)
+    command: build
+    Dockerfile: app/Dockerfile
+
+- task: Docker@2
+  displayName: Push image
+  inputs:
+    containerRegistry: |
+      $(dockerHub)
+    repository: $(imageName)
+    command: push
+    tags: |
+      latest
+>>>>>>> b0d5e8c82d03e16f8abfc9c1bf1bde83de6ab80a
