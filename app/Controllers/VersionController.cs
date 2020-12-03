@@ -9,6 +9,7 @@ namespace simple_web_api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [ApiVersion("1.0")]
     public class VersionController : ControllerBase
     {
         private readonly IConfiguration _configuration;
@@ -18,9 +19,12 @@ namespace simple_web_api.Controllers
             _configuration = configuration;
         }
 
-        [HttpGet]
+        [HttpGet, MapToApiVersion("1.0")]
         public async Task<IActionResult> Get()
         {
+            var r = Request;
+            var headers = r.Headers;
+
             using (var client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Add("User-Agent",
@@ -34,7 +38,7 @@ namespace simple_web_api.Controllers
 
                     var myApplication = new Response
                     {
-                        Version = "1.0",
+                        Version = headers["api-version"],
                         lastCommit = lastCommit
                     };
 
