@@ -61,4 +61,4 @@ steps:
     containerRegistry: 'simplewebapiacr'
     repository: 'simplewebapiimage'
     command: 'buildAndPush'
-    Dockerfile: '$(System.DefaultWorkingDirectory)/app/Dockerfile'
+    Dockerfile: '**/app/Dockerfile'
