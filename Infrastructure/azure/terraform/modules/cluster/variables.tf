@@ -1,23 +1,14 @@
 variable "resource_group_name" {
 }
-
-variable "serviceprinciple_id" {
+variable "client_id" {
+  default = ""
 }
-
-variable "serviceprinciple_key" {
+variable "client_secret" {
+  default = ""
 }
-
 variable "location" {
   default = "australiaeast"
 }
-
-variable "kubernetes_cluster_name" {
-  
-}
-
 variable "kubernetes_version" {
     default = "1.18.10"
 }
-
-# variable "ssh_key" {
-# }

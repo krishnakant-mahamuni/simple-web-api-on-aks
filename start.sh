@@ -12,6 +12,9 @@ SERVICE_PRINCIPAL_JSON=$(az ad sp create-for-rbac --skip-assignment --name aks-s
 SERVICE_PRINCIPAL=$(echo $SERVICE_PRINCIPAL_JSON | jq -r '.appId')
 SERVICE_PRINCIPAL_SECRET=$(echo $SERVICE_PRINCIPAL_JSON | jq -r '.password')
 
+echo $SERVICE_PRINCIPAL
+echo $SERVICE_PRINCIPAL_SECRET
+
 az role assignment create --assignee $SERVICE_PRINCIPAL \
 --scope "/subscriptions/$SUBSCRIPTION_ID" \
 --role Contributor

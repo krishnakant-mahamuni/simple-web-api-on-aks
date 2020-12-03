@@ -1,31 +1,31 @@
-variable "resource_group_name" {
-}
-
-variable "serviceprinciple_id" {
-}
-
-variable "serviceprinciple_key" {
-}
-
-variable "tenant_id" {
-}
-
 variable "subscription_id" {
+  default = ""
 }
-
-# variable "ssh_key" {
-# }
-
+variable "resource_group_name"{
+  default="simple-web-api-rg"
+}
+variable "tenant_id" {
+  default = ""
+}
+variable "client_id" {
+  default = ""
+}
+variable "client_secret" {
+  default = ""
+}
+variable "prefix" {
+  default = "simple-web-api"
+}
 variable "location" {
-  default = "australiaeast"
+  default = ""
 }
-
-variable "kubernetes_version" {
-    default = "1.18.10"
+variable "node_vm_size" {
+  default = "Standard_B2s"
 }
-
-variable "kubernetes_cluster_name" {
+variable "node_count" {
+  type    = number
+  default = 1
 }
-
-variable "sku" {
+variable "kubernetes_version"{
+  default = "1.18.10"
 }
