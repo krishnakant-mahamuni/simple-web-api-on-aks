@@ -29,3 +29,6 @@ variable "node_count" {
 variable "kubernetes_version"{
   default = "1.18.10"
 }
+variable "sku"{
+  default = "Standard"
+}
