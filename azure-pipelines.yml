@@ -41,5 +41,5 @@ steps:
   displayName: Terraform Plan
   inputs:
     command: 'validate'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/Infrastructure/azue/terraform'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/Infrastructure/azure/terraform'
     allowTelemetryCollection: true
