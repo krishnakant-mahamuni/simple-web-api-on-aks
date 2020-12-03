@@ -33,12 +33,12 @@ resource "azurerm_kubernetes_cluster" "simple-web-api-aks" {
     client_secret = var.serviceprinciple_key
   }
 
-  linux_profile {
-    admin_username = "azureuser"
-    ssh_key {
-      key_data = var.ssh_key
-    }
-  }
+  # linux_profile {
+  #   admin_username = "azureuser"
+  #   ssh_key {
+  #     key_data = var.ssh_key
+  #   }
+  # }
 
   network_profile {
     network_plugin    = "kubenet"
