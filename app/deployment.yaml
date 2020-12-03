@@ -12,6 +12,8 @@ spec:
       labels:
         app: simple-web-api
     spec:
+      imagePullSecrets:
+      - name: acr-secret
       containers:
       - name: simple-web-api
         image: simplewebapiacr.azurecr.io/simplewebapiimage:latest
