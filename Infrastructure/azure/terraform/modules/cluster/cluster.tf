@@ -15,8 +15,7 @@ resource "azurerm_kubernetes_cluster" "simple-web-api-aks" {
   kubernetes_version  = var.kubernetes_version
 
   tags = {
-    "createdUsing" = "terraform"
-    "owner" = "krishnakant"
+    managedby = "terraform"
   }
   
   default_node_pool {
