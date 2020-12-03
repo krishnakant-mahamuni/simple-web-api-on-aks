@@ -67,7 +67,7 @@ steps:
       latest
 
 - task: Kubernetes@1
-  displayName: Deploy to AKS Cluster
+  displayName: Delete deployment
   inputs:
     connectionType: 'Azure Resource Manager'
     azureSubscriptionEndpoint: 'Free Trial (1905b060-3f48-4b00-8b11-7554c4fc2492)'
@@ -75,16 +75,10 @@ steps:
     kubernetesCluster: 'simple-web-api-aks'
     namespace: 'default'
     command: 'delete'
-    useConfigurationFile: true
-    configuration: 'app/deployment.yaml'
-    secretType: 'dockerRegistry'
-    containerRegistryType: 'Azure Container Registry'
-    azureSubscriptionEndpointForSecrets: 'Free Trial (1905b060-3f48-4b00-8b11-7554c4fc2492)'
-    azureContainerRegistry: 'simplewebapiacr.azurecr.io'
-    secretName: 'acr-secret'
+    arguments: 'deployment simple-web-api'
 
 - task: Kubernetes@1
-  displayName: Deploy to AKS Cluster
+  displayName: Deploy Deployment & Service
   inputs:
     connectionType: 'Azure Resource Manager'
     azureSubscriptionEndpoint: 'Free Trial (1905b060-3f48-4b00-8b11-7554c4fc2492)'
