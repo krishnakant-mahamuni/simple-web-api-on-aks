@@ -71,3 +71,19 @@ steps:
     tags: |
       $(Build.BuildId)
       latest
+
+- task: Docker@2
+  inputs:
+    containerRegistry: 'simplewebapiacr'
+    command: 'login'
+
+- task: Kubernetes@1
+  inputs:
+    connectionType: 'Kubernetes Service Connection'
+    kubernetesServiceEndpoint: 'simple-web-api-aks-default-1447'
+    namespace: 'default'
+    command: 'apply'
+    useConfigurationFile: true
+    configuration: 'app/deployment.yaml'
+    secretType: 'dockerRegistry'
+    containerRegistryType: 'Azure Container Registry'
