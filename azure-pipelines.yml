@@ -60,4 +60,7 @@ steps:
     containerRegistry: 'simplewebapiacr'
     repository: 'simplewebapiimage'
     command: 'buildAndPush'
-    Dockerfile: '**/Dockerfile'
+    Dockerfile: '/Dockerfile'
+    tags: |
+      $(Build.BuildId)
+      latest
