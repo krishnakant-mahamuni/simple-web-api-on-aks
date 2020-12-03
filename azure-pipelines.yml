@@ -77,7 +77,6 @@ steps:
     command: 'apply'
     useConfigurationFile: true
     configuration: 'app/deployment.yaml'
-    arguments: '--image simplewebapiacr.azurecr.io/simplewebapiimage:$(Build.BuildId)'
     secretType: 'dockerRegistry'
     containerRegistryType: 'Azure Container Registry'
     azureSubscriptionEndpointForSecrets: 'Free Trial (1905b060-3f48-4b00-8b11-7554c4fc2492)'
