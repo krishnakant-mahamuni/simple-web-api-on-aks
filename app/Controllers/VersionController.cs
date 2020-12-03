@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using app.Models;
@@ -32,7 +33,7 @@ namespace simple_web_api.Controllers
 
                 using (var response = await client.GetAsync(_configuration.GetValue<string>("gitUrl")))
                 {
-                    if(!response.IsSuccessStatusCode)
+                    if (!response.IsSuccessStatusCode)
                     {
                         return BadRequest();
                     }
@@ -41,10 +42,13 @@ namespace simple_web_api.Controllers
                     dynamic commits = JArray.Parse(json);
                     var lastCommit = commits[0].sha;
 
-                    var myApplication = new Response
+                    var myApplication = new List<Response>
                     {
-                        Version = headers["api-version"],
-                        lastCommit = lastCommit
+                        new Response
+                        {
+                            Version = headers["api-version"],
+                            Lastcommitsha = lastCommit
+                        }
                     };
 
                     return Ok(myApplication);
