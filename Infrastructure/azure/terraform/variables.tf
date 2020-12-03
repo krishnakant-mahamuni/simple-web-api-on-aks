@@ -13,8 +13,8 @@ variable "tenant_id" {
 variable "subscription_id" {
 }
 
-variable "ssh_key" {
-}
+# variable "ssh_key" {
+# }
 
 variable "location" {
   default = "australiaeast"
