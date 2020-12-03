@@ -34,10 +34,6 @@ resource "azurerm_kubernetes_cluster" "simple-web-api-aks" {
     }
   }
 
-  tags = {
-    managedby = "terraform"
-  }
-
   lifecycle {
     ignore_changes = [
       default_node_pool[0].node_count,
