@@ -1,27 +1,16 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
 trigger:
 - main
 
 pool:
   vmImage: 'ubuntu-latest'
 
-  variables:
-    imageName: 'simple-web-api-image'
-  
-  steps:
-  - task: Docker@2
-    displayName: Build an image
-    inputs:
-      repository: $(imageName)
-      command: build
-      Dockerfile: app/Dockerfile
+variables:
+  subscription_id: "<<subscription_id>>"
+  tenant_id: "<<tenant_id>>"
 
-  - task: Docker@2
-    displayName: Push image
-    inputs:
-      containerRegistry: |
-        $(dockerHub)
-      repository: $(imageName)
-      command: push
-      tags: |
-        latest
-     
+  

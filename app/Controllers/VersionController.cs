@@ -32,6 +32,11 @@ namespace simple_web_api.Controllers
 
                 using (var response = await client.GetAsync(_configuration.GetValue<string>("gitUrl")))
                 {
+                    if(!response.IsSuccessStatusCode)
+                    {
+                        return BadRequest();
+                    }
+
                     var json = await response.Content.ReadAsStringAsync();
                     dynamic commits = JArray.Parse(json);
                     var lastCommit = commits[0].sha;
