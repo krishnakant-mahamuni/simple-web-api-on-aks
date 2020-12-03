@@ -32,9 +32,7 @@ resource "azurerm_kubernetes_cluster" "simple-web-api-aks" {
     kube_dashboard {
       enabled = true
     }
-  }
 
-  addon_profile {
     aci_connector_linux {
       enabled = false
     }
