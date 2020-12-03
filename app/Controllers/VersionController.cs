@@ -26,6 +26,11 @@ namespace simple_web_api.Controllers
             var r = Request;
             var headers = r.Headers;
 
+            if(string.IsNullOrEmpty(headers["api-version"]))
+            {
+                return BadRequest();
+            }
+
             using (var client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Add("User-Agent",
@@ -35,7 +40,7 @@ namespace simple_web_api.Controllers
                 {
                     if (!response.IsSuccessStatusCode)
                     {
-                        return BadRequest();
+                        return NotFound();
                     }
 
                     var json = await response.Content.ReadAsStringAsync();
