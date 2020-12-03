@@ -31,3 +31,14 @@ export ARM_ACCESS_KEY=77ZvD3TWqdNSjku7RXZ9Rkv+PPIS2rVGUSxiQt7CKkAvp8YzH2oBL2v1hR
 
 ssh-keygen -t rsa -b 4096 -N "VeryStrongSecret007!" -C "kk.dev.ms@outlook.com" -q -f  ~/.ssh/id_rsa
 SSH_KEY=$(cat ~/.ssh/id_rsa.pub)
+
+
+
+
+- task: Docker@2
+  displayName: Build and Push Docker image to Container Registry
+  inputs:
+    containerRegistry: 'simplewebapiacr'
+    repository: 'simplewebapiimage'
+    command: 'buildAndPush'
+    Dockerfile: '/app/Dockerfile'

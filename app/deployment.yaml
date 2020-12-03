@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: simple-web-api
-        image: nginx
+        image: simplewebapiacr.azurecr.io/simplewebapiimage:latest
         resources:
           limits:
             memory: "128Mi"
