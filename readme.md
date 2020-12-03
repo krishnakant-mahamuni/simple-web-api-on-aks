@@ -2,8 +2,9 @@
 
 ```
 #login and follow prompts
+
 az login 
-    TENTANT_ID=<your-tenant-id>    
+TENTANT_ID=<your-tenant-id>    
 
 # view and select your subscription account
 
@@ -72,19 +73,19 @@ Documentation on all the Kubernetes fields for terraform [here](https://www.terr
 terraform init
 
 terraform plan -var resource_group_name="simple-web-api-rg" \
-    -var serviceprinciple_id="$SERVICE_PRINCIPAL" \
-    -var serviceprinciple_key="$SERVICE_PRINCIPAL_SECRET" \
-    -var subscription_id="$SUBSCRIPTION" \
-    -var tenant_id="$TENANT_ID" \
-    -var ssh_key="$SSH_KEY" \
-    -var kubernetes_cluster_name="simple-web-api-aks" \
-    -var sku="Standard"
+-var serviceprinciple_id="$SERVICE_PRINCIPAL" \
+-var serviceprinciple_key="$SERVICE_PRINCIPAL_SECRET" \
+-var subscription_id="$SUBSCRIPTION" \
+-var tenant_id="$TENANT_ID" \
+-var ssh_key="$SSH_KEY" \
+-var kubernetes_cluster_name="simple-web-api-aks" \
+-var sku="Standard" -auto-approve
 
 terraform apply -var resource_group_name="simple-web-api-rg" \
     -var serviceprinciple_id="$SERVICE_PRINCIPAL" \
     -var serviceprinciple_key="$SERVICE_PRINCIPAL_SECRET" \
-    -var tenant_id="$TENANT_ID" \
     -var subscription_id="$SUBSCRIPTION" \
+    -var tenant_id="$TENANT_ID" \
     -var ssh_key="$SSH_KEY" \
     -var kubernetes_cluster_name="simple-web-api-aks" \
     -var sku="Standard" -auto-approve
@@ -92,11 +93,15 @@ terraform apply -var resource_group_name="simple-web-api-rg" \
 terraform destroy -var resource_group_name="simple-web-api-rg" \
     -var serviceprinciple_id="$SERVICE_PRINCIPAL" \
     -var serviceprinciple_key="$SERVICE_PRINCIPAL_SECRET" \
-    -var tenant_id="$TENANT_ID" \
     -var subscription_id="$SUBSCRIPTION" \
+    -var tenant_id="$TENANT_ID" \
     -var ssh_key="$SSH_KEY" \
-    -var kubernetes_cluster_name="simple-web-api-aks" 
-    -var sku="Standard" -auto-approve
+    -var kubernetes_cluster_name="simple-web-api-aks" \
+    -var sku="Standard" \
+    -var state_storage_account_name="aetfstate001sa" \
+    -var state_storage_container_name="tfstate" \
+    -var state_key="prod.terraform.tfstate" \
+    -var sas_token="77ZvD3TWqdNSjku7RXZ9Rkv+PPIS2rVGUSxiQt7CKkAvp8YzH2oBL2v1hRiJdMNVv92xRGoTyYRFByc7NnTnzw==" -auto-approve
     
 ```
 

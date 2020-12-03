@@ -9,6 +9,11 @@ provider "azurerm" {
   features {}
 }
 
+terraform {
+  backend "azurerm" {
+  }
+}
+
 module "cluster" {
   source                  = "./modules/cluster/"
   kubernetes_cluster_name = var.kubernetes_cluster_name
