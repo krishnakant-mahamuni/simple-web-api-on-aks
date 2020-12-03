@@ -6,6 +6,9 @@
 trigger:
 - main
 
+resources:
+- repo: self
+
 pool:
   vmImage: 'ubuntu-latest'
 
@@ -15,6 +18,12 @@ variables:
   storageAccount: aetfstate001sa
   container: tfstate
   tfstateFile: terraform.tfstate
+  dockerRegistryServiceConnection: 'e6d3c506-ba4e-4c96-8d8f-47e64f46d4fa'
+  imageRepository: 'krishnakantmahamunisimplewebapionaks'
+  containerRegistry: 'simplewebapiacr.azurecr.io'
+  dockerfilePath: '**/Dockerfile'
+  tag: '$(Build.BuildId)'
+  imagePullSecret: 'simplewebapiacr25093016-auth'
 
 steps:
 - task: TerraformInstaller@0
@@ -54,3 +63,57 @@ steps:
     environmentServiceName: 'Free Trial(1905b060-3f48-4b00-8b11-7554c4fc2492)'
     secureVarsFile: 'azure.tfvars'
     allowTelemetryCollection: true
+
+stages:
+- stage: Build
+  displayName: Build stage
+  jobs:  
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+          
+    - upload: manifests
+      artifact: manifests
+
+- stage: Deploy
+  displayName: Deploy stage
+  dependsOn: Build
+
+  jobs:
+  - deployment: Deploy
+    displayName: Deploy
+    pool:
+      vmImage: $(vmImageName)
+    environment: 'krishnakantmahamunisimplewebapionaks-2136.default'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: KubernetesManifest@0
+            displayName: Create imagePullSecret
+            inputs:
+              action: createSecret
+              secretName: $(imagePullSecret)
+              dockerRegistryEndpoint: $(dockerRegistryServiceConnection)
+              
+          - task: KubernetesManifest@0
+            displayName: Deploy to Kubernetes cluster
+            inputs:
+              action: deploy
+              manifests: |
+                $(Pipeline.Workspace)/manifests/deployment.yml
+              imagePullSecrets: |
+                $(imagePullSecret)
+              containers: |
+                $(containerRegistry)/$(imageRepository):$(tag)
