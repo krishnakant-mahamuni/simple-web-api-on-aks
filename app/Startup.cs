@@ -30,8 +30,6 @@ namespace simple_web_api
             services.AddControllers();
             services.AddApiVersioning(config =>
             {
-                config.DefaultApiVersion = new ApiVersion(1, 0);
-                config.AssumeDefaultVersionWhenUnspecified = false;
                 config.ReportApiVersions = true;
                 config.ApiVersionReader = ApiVersionReader.Combine(new HeaderApiVersionReader("api-version"));
             });
