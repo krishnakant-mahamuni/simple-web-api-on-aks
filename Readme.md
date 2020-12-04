@@ -11,7 +11,7 @@
 7. Terraform
 
 ```
-## Resources Requird
+## Resources Required
 
 1. Azure Storage Account (used as backend for terraform)
 2. Azure Kubernetes Service (Docker image will be deployed to this kubernetes instance)
