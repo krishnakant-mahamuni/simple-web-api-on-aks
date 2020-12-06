@@ -54,11 +54,17 @@ steps:
     environmentServiceName: 'Free Trial(1905b060-3f48-4b00-8b11-7554c4fc2492)'
     secureVarsFile: 'azure.tfvars'
     allowTelemetryCollection: true
-   
-- task: Docker@2
+
+- task: Kubernetes@1
+  displayName: Delete Deployment
   inputs:
-    containerRegistry: 'simplewebapiacr'
-    command: 'login'
+    connectionType: 'Azure Resource Manager'
+    azureSubscriptionEndpoint: 'Default Subscription (1905b060-3f48-4b00-8b11-7554c4fc2492)'
+    azureResourceGroup: 'simple-web-api-rg'
+    kubernetesCluster: 'simple-web-api-aks'
+    namespace: 'default'
+    command: 'delete'
+    arguments: 'deployment simple-web-api'
 
 - task: Docker@2
   displayName: Build and Push Docker Image
